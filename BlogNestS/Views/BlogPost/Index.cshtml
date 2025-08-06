@@ -1,0 +1,45 @@
+﻿@model List<BlogPost>
+<a asp-action="CreateOrEdit" class="btn btn-primary btn-sm">Add New Blogpost</a>
+
+<table class="table table-bordered table-striped">
+    <thead >
+        <tr>
+            <th>Id</th>
+            <th>Heading</th>
+            <th>PageTitle</th>
+            <th>Content</th>
+            <th>ShortDescription</th>
+            <th>FeaturedImageUrl</th>
+            <th>UrlHandle</th>
+            <th>PublishedDate</th>
+            <th>Author</th>
+            <th>Visible</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var post in Model)
+        {
+          <tr>
+              <td>@post.Id</td>
+              <td>@post.Heading</td>
+              <td>@post.PageTitle</td>
+              <td>@post.Content</td>
+              <td>@post.ShortDescription</td>
+              <td>@post.FeaturedImageUrl</td>
+              <td>@post.UrlHandle</td>
+              <td>@post.PublishedDate</td>
+              <td>@post.Author</td>
+              <td>@post.Visible</td>
+              <td>
+                  <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary">Details</a>
+                    <form method="post" asp-action="Delete" asp-route-id="@post.Id">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+         
+                    <a asp-action="CreateOrEdit" asp-route-id="@post.Id" class="btn btn-primary">Edit</a>
+                </td>
+          </tr>  
+        }
+    </tbody>
+</table>

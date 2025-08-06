@@ -1,0 +1,57 @@
+﻿@model BlogPost
+
+<h2 class="mb-4">Blog Post Details</h2>
+
+<div class="card shadow border-0">
+    <div class="card-body">
+        <div class="mb-4">
+            <h3 class="card-title">@Model.Heading</h3>
+            <p class="text-muted mb-1">By <strong>@Model.Author</strong></p>
+            <p class="text-muted">Published on @Model.PublishedDate.ToString("MMMM dd, yyyy")</p>
+        </div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th style="width: 25%;">Page Title</th>
+                <td>@Model.PageTitle</td>
+            </tr>
+            <tr>
+                <th>Short Description</th>
+                <td>@Model.ShortDescription</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>@Html.Raw(Model.Content)</td>
+            </tr>
+            <tr>
+                <th>Featured Image</th>
+                <td>
+                    <img src="@Model.FeaturedImageUrl" alt="Featured" class="img-fluid rounded" style="max-height: 300px;" />
+                </td>
+            </tr>
+            <tr>
+                <th>URL Handle</th>
+                <td>@Model.UrlHandle</td>
+            </tr>
+            <tr>
+                <th>Visible</th>
+                <td>
+                    @if (Model.Visible)
+                    {
+                        <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No</span>
+                    }
+                </td>
+            </tr>
+        </table>
+
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+
