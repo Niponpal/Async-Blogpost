@@ -12,5 +12,8 @@ namespace BlogNestS.Data
         public DbSet<BlogPost> blogPosts { get; set; }
         public object BlogPosts { get; internal set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<BlogPostComment> BlogPostsComment { get; set; }
+        public DbSet<BlogPostLike> BlogPostsLikes { get; set; }
+
     }
 }

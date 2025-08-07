@@ -62,29 +62,48 @@ namespace BlogNestS.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+{
+    if (!ModelState.IsValid)
+    {
+        return View(loginViewModel);
+    }
+
+    var signInResult = await _signInManager.PasswordSignInAsync(
+        loginViewModel.Username, 
+        loginViewModel.Password, 
+        isPersistent: false, 
+        lockoutOnFailure: false);
+
+    if (signInResult.Succeeded)
+    {
+        var user = await _userManager.FindByNameAsync(loginViewModel.Username);
+
+        if (user != null)
         {
+            var roles = await _userManager.GetRolesAsync(user);
 
-            if (!ModelState.IsValid)
+            if (roles.Contains("Admin"))
             {
-                return View();
-            }
-            var signInResult = await _signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, false, false);
+                // Redirect Admin to Admin Area Dashboard
+             return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
 
-
-            if (signInResult != null && signInResult.Succeeded)
-            {
-                if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
-                {
-                    return Redirect(loginViewModel.ReturnUrl);
-                }
-
-                return RedirectToAction("Index", "Home");
-            }
-
-
-            return View();
+             }
         }
+
+        if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
+        {
+            return Redirect(loginViewModel.ReturnUrl);
+        }
+
+           //return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+           return RedirectToAction("Index", "Home");
+    }
+
+    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+    return View(loginViewModel);
+}
+
 
 
         [HttpGet]

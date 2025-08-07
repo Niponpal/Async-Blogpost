@@ -1,8 +1,6 @@
-﻿using Azure;
-
-namespace BlogNestS.Models
+﻿namespace BlogNestS.Models
 {
-    public class BlogPost
+    public class BlogDetailsViewModel
     {
         public Guid Id { get; set; }
         public string Heading { get; set; }
@@ -14,8 +12,14 @@ namespace BlogNestS.Models
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool Visible { get; set; }
+
+        public int TotalLikes { get; set; }
+        public bool IsLiked { get; set; }
+        public string CommentDescription { get; set; }
+
+        public IEnumerable<BlogComment> Comments { get; set; }
+        // navigation propertities 
         public ICollection<Tag> Tags { get; set; }
-        public ICollection<BlogPostLike> Likes { get; set; }
-        public ICollection<BlogPostComment> Comments { get; set; }
+
     }
 }

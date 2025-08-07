@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogNestS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250807132051_int")]
-    partial class @int
+    [Migration("20250807155631_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,51 @@ namespace BlogNestS.Migrations
                     b.ToTable("blogPosts");
                 });
 
+            modelBuilder.Entity("BlogNestS.Models.BlogPostComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogPostComment");
+                });
+
+            modelBuilder.Entity("BlogNestS.Models.BlogPostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogPostLike");
+                });
+
             modelBuilder.Entity("BlogNestS.Models.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -104,6 +149,24 @@ namespace BlogNestS.Migrations
                     b.ToTable("BlogPostTag");
                 });
 
+            modelBuilder.Entity("BlogNestS.Models.BlogPostComment", b =>
+                {
+                    b.HasOne("BlogNestS.Models.BlogPost", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BlogNestS.Models.BlogPostLike", b =>
+                {
+                    b.HasOne("BlogNestS.Models.BlogPost", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("BlogPostTag", b =>
                 {
                     b.HasOne("BlogNestS.Models.Tag", null)
@@ -117,6 +180,13 @@ namespace BlogNestS.Migrations
                         .HasForeignKey("blogPostsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BlogNestS.Models.BlogPost", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
