@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogNestS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250805055923_int")]
-    partial class @int
+    [Migration("20250807102300_intdb")]
+    partial class intdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,25 @@ namespace BlogNestS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("blogPosts");
+                });
+
+            modelBuilder.Entity("BlogNestS.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
                 });
 #pragma warning restore 612, 618
         }

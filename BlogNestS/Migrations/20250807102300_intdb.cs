@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogNestS.Migrations
 {
     /// <inheritdoc />
-    public partial class @int : Migration
+    public partial class intdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,19 @@ namespace BlogNestS.Migrations
                 {
                     table.PrimaryKey("PK_blogPosts", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -37,6 +50,9 @@ namespace BlogNestS.Migrations
         {
             migrationBuilder.DropTable(
                 name: "blogPosts");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
         }
     }
 }

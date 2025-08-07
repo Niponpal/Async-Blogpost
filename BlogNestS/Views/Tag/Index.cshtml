@@ -1,0 +1,27 @@
+﻿@model List<Tag>
+
+<a asp-action="CreateOrEdit" class="btn btn-primary mb-3"> <i class="bi bi-database-fill-add"></i>Add New Tag</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                 <th>ACtion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tag in Model)
+            {
+                <tr>
+                    <td>@tag.Id</td>
+                    <td>@tag.Name</td>
+                    <td>@tag.DisplayName</td>
+                    <td>
+                    <a asp-action="CreateOrEdit" asp-route-id="@tag.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-action="CreateOrEdit" asp-route-id="@tag.Id" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                    <a asp-action="Details" asp-route-id="@tag.Id" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
+                </td>
+                </tr>
+        }
+    </table>

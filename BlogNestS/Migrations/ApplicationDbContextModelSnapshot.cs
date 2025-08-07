@@ -66,6 +66,25 @@ namespace BlogNestS.Migrations
 
                     b.ToTable("blogPosts");
                 });
+
+            modelBuilder.Entity("BlogNestS.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
 #pragma warning restore 612, 618
         }
     }
