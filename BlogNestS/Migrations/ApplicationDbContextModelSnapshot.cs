@@ -85,6 +85,36 @@ namespace BlogNestS.Migrations
 
                     b.ToTable("Tags");
                 });
+
+            modelBuilder.Entity("BlogPostTag", b =>
+                {
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("blogPostsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TagsId", "blogPostsId");
+
+                    b.HasIndex("blogPostsId");
+
+                    b.ToTable("BlogPostTag");
+                });
+
+            modelBuilder.Entity("BlogPostTag", b =>
+                {
+                    b.HasOne("BlogNestS.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogNestS.Models.BlogPost", null)
+                        .WithMany()
+                        .HasForeignKey("blogPostsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
         }
     }
