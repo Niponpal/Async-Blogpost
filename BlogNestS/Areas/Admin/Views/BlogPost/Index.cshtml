@@ -33,17 +33,27 @@
                         <td>@post.PageTitle</td>
                         <td>@post.Content</td>
                         <td>@post.ShortDescription</td>
-                        <td>@post.FeaturedImageUrl</td>
+                        <!-- <td>@post.FeaturedImageUrl</td> -->
+                        <td>
+                            @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
+                            {
+                                <a href="@Url.Content(post.FeaturedImageUrl)" target="_blank">View</a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No File</span>
+                            }
+                        </td>
                         <td>@post.UrlHandle</td>
                         <td>@post.PublishedDate</td>
                         <td>@post.Author</td>
                         <td>@post.Visible</td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary">Details</a>
+                            <a asp-action="CreateOrEdit" asp-route-id="@post.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                             <form method="post" asp-action="Delete" asp-route-id="@post.Id" onclick="return confirm('Are You Sure Delete Data')">
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <button class="btn btn-danger" type="submit"><i class="bi bi-trash"></i></button>
                             </form>
-                            <a asp-action="CreateOrEdit" asp-route-id="@post.Id" class="btn btn-primary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
                         </td>
                     </tr>
                 }
