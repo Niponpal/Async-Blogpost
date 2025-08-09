@@ -15,9 +15,18 @@ namespace BlogNestS.Repositorys
 
         public async Task<BlogPost> AddAsync(BlogPost blogPost)
         {
-            await _context.blogPosts.AddAsync(blogPost);
-            await _context.SaveChangesAsync();
-            return blogPost;
+            try
+            {
+                await _context.blogPosts.AddAsync(blogPost);
+                await _context.SaveChangesAsync();
+                return blogPost;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public async Task<BlogPost?> DeleteAsync(Guid id)

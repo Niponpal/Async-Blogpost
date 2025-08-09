@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogNestS.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initia : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,7 @@ namespace BlogNestS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogPostComment",
+                name: "BlogPostsComment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -56,9 +56,9 @@ namespace BlogNestS.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogPostComment", x => x.Id);
+                    table.PrimaryKey("PK_BlogPostsComment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlogPostComment_blogPosts_BlogPostId",
+                        name: "FK_BlogPostsComment_blogPosts_BlogPostId",
                         column: x => x.BlogPostId,
                         principalTable: "blogPosts",
                         principalColumn: "Id",
@@ -66,7 +66,7 @@ namespace BlogNestS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogPostLike",
+                name: "BlogPostsLikes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -75,9 +75,9 @@ namespace BlogNestS.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogPostLike", x => x.Id);
+                    table.PrimaryKey("PK_BlogPostsLikes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlogPostLike_blogPosts_BlogPostId",
+                        name: "FK_BlogPostsLikes_blogPosts_BlogPostId",
                         column: x => x.BlogPostId,
                         principalTable: "blogPosts",
                         principalColumn: "Id",
@@ -109,13 +109,13 @@ namespace BlogNestS.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlogPostComment_BlogPostId",
-                table: "BlogPostComment",
+                name: "IX_BlogPostsComment_BlogPostId",
+                table: "BlogPostsComment",
                 column: "BlogPostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlogPostLike_BlogPostId",
-                table: "BlogPostLike",
+                name: "IX_BlogPostsLikes_BlogPostId",
+                table: "BlogPostsLikes",
                 column: "BlogPostId");
 
             migrationBuilder.CreateIndex(
@@ -128,10 +128,10 @@ namespace BlogNestS.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BlogPostComment");
+                name: "BlogPostsComment");
 
             migrationBuilder.DropTable(
-                name: "BlogPostLike");
+                name: "BlogPostsLikes");
 
             migrationBuilder.DropTable(
                 name: "BlogPostTag");

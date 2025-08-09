@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogNestS.Migrations
+namespace BlogNestS.Models
 {
     public class AddBlogPostRequest
     {

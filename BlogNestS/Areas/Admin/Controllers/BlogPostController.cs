@@ -35,18 +35,14 @@ namespace BlogNestS.Areas.Admin.Controllers
         {
             if (Id == Guid.Empty)
             {
-                if (ModelState.IsValid)
-                {
                     var data = await _blogPostRepository.AddAsync(blogPost);
-                    return RedirectToAction("index");
-                }
+                    return RedirectToAction("index"); 
             }
             else
             {
                 await _blogPostRepository.UpdateAsync(blogPost);
                 return RedirectToAction("Index");
             }
-            return View(blogPost);
         }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)

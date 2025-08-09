@@ -9,7 +9,7 @@
                 <div class="card-body p-4 ">
                     <h3 class="mb-4 text-center">Create or Edit Blog Post</h3>
 
-                    <form method="post" asp-action="CreateOrEdit">
+                    <form method="post" asp-controller="BlogPost" asp-action="CreateOrEdit" enctype="multipart/form-data">
                         <div class="row g-3">
 
                             <div class="col-md-6">
@@ -56,7 +56,7 @@
 
                             <div class="col-12">
                                 <label asp-for="Content" class="form-label">Content</label>
-                                <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+                                <textarea  asp-for="Content" class="form-control" rows="4"></textarea>
                             </div>
 
                             <div class="col-12">

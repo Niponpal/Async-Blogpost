@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogNestS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250807155631_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250809141317_Initia")]
+    partial class Initia
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,7 +93,7 @@ namespace BlogNestS.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("BlogPostComment");
+                    b.ToTable("BlogPostsComment");
                 });
 
             modelBuilder.Entity("BlogNestS.Models.BlogPostLike", b =>
@@ -112,7 +112,7 @@ namespace BlogNestS.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("BlogPostLike");
+                    b.ToTable("BlogPostsLikes");
                 });
 
             modelBuilder.Entity("BlogNestS.Models.Tag", b =>

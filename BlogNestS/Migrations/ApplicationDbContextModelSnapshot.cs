@@ -90,7 +90,7 @@ namespace BlogNestS.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("BlogPostComment");
+                    b.ToTable("BlogPostsComment");
                 });
 
             modelBuilder.Entity("BlogNestS.Models.BlogPostLike", b =>
@@ -109,7 +109,7 @@ namespace BlogNestS.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("BlogPostLike");
+                    b.ToTable("BlogPostsLikes");
                 });
 
             modelBuilder.Entity("BlogNestS.Models.Tag", b =>

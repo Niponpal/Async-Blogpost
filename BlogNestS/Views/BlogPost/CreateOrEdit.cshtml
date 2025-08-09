@@ -1,8 +1,7 @@
 ﻿@model BlogPost
 
 
-
-<form method="post" asp-action="CreateOrEdit">
+<form method="post" asp-action="CreateOrEdit" asp-controller="BlogPost" enctype="multipart/form-data">
     <div class="row mb-3">
         <div class="col-md-6">
             <label asp-for="Heading" class="form-label">Heading</label>
